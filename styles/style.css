@@ -32,3 +32,18 @@ body{
 .cardImg{
     height: 10em;
 }
+.details{
+    
+    margin-top: 2em;
+}
+.detailsImg{
+    width: 25vw;
+}
+table{
+    border-collapse: collapse;
+}
+th, td {
+    height: 3em;
+    border: 1px solid black; 
+    text-align: center; 
+}

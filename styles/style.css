@@ -1,0 +1,34 @@
+.imgBrand{
+    width: 5em;
+}
+
+.navbar{
+    background-color: rgb(33, 131, 128);
+}
+
+.social{
+    width: 2em;
+}
+.main{
+    min-height: 100%
+}
+.carru{
+    
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+}
+.textImg{
+    position: absolute;
+    top: 10%;
+    color: rgb(143, 45, 86);
+}
+body{
+    background-color: rgb(115, 210, 222);
+}
+.textCard{
+    font-size: 1.5em;
+}
+.cardImg{
+    height: 10em;
+}

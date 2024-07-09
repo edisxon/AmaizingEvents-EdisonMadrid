@@ -1,3 +1,5 @@
+
+
 .imgBrand{
     width: 5em;
 }
@@ -20,7 +22,7 @@
 }
 .textImg{
     position: absolute;
-    top: 10%;
+    
     color: rgb(143, 45, 86);
 }
 body{

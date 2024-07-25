@@ -192,9 +192,9 @@ const events = [
     }
 ]
 
-const currentDate = new Date("2023-01-01")
+const currentDate = "2023-01-01"
 
-const upcomingEvents = events.filter(event => new Date(event.date) > currentDate)
+const upcomingEvents = events.filter(event => (event.date) > currentDate)
 const cardsContainer = document.getElementById("cardsContainer")
 
 function renderCards (array, container){

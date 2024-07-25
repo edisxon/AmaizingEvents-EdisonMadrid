@@ -49,3 +49,7 @@ th, td {
     border: 1px solid black; 
     text-align: center; 
 }
+
+.card{
+    width: 18rem;
+}

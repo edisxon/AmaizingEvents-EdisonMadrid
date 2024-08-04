@@ -199,22 +199,24 @@ const cardsContainer = document.getElementById("cardsContainer")
 
 function renderCards (array, container){
     for (let i=0; i<array.length; i++){
-        const card = document.createElement("div")
-        card.classList.add("card")
-        card.innerHTML = `
-        <img src="${array[i].image}" class="card-img-top cardImg" alt="${array[i].name}">
-        <div class="card-body">
-            <h5 class="card-title text-center">${array[i].name}</h5>
+      const card = document.createElement("div")
+      card.classList.add("card")
+      card.innerHTML = `
+      <img src="${array[i].image}" class="card-img-top cardImg" alt="${array[i].name}">
+      <div class="card-body">
+          <h5 class="card-title text-center">${array[i].name}</h5>
+          <div class="textContainer mb-4">
             <p class="card-text">${array[i].description}</p>
-            <div class="d-flex justify-content-between">
-              <span class="textCard">$${array[i].price}</span>
-              <a href="./pages/details.html" class="btn btn-secondary">Details</a>
-            </div>
-            
-        </div>`
-        //console.log(card);
-        container.appendChild(card)
-    }
+          </div>
+          <div class="cardButtonContainer ">
+            <span class="textCard">$${array[i].price}</span>
+            <a href="./pages/details.html" class="btn btn-secondary">Details</a>
+          </div>
+          
+      </div>`
+      // console.log(card);
+      container.appendChild(card)
+  }
 
 }
 renderCards(pastEvents, cardsContainer)

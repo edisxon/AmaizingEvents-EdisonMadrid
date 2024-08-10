@@ -194,6 +194,32 @@ const events = [
 
 
 const cardsContainer = document.getElementById("cardsContainer")
+const checkContainer = document.getElementById("checkContainer")
+const arrayCheck = []
+
+
+
+
+
+
+
+
+events.forEach(elem => {
+  if (arrayCheck.includes(elem.category) === false){
+    arrayCheck.push(elem.category)
+  }
+})
+
+
+arrayCheck.forEach(elem => {
+  const check = document.createElement("div")
+  check.innerHTML = `
+    <input class="formCheck" type="checkbox" value="${elem}" name="${elem}">
+    <label class="formCheckLabel" for="${elem}">
+      ${elem}
+    </label>`
+    checkContainer.appendChild(check)
+})
 
 
 function renderCards (array, container){
@@ -219,3 +245,37 @@ function renderCards (array, container){
 
 }
 renderCards(events, cardsContainer)
+
+
+const searchInput = document.getElementById("searchInput")
+const checkboxes = document.querySelectorAll(".formCheck")
+
+function filterEvents() {
+  const searchText = searchInput.value.toLowerCase(); 
+  const selectedCategories = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.name)
+
+  let filteredEvents = events.filter(event => {
+      const matchesSearch = (event.name.toLowerCase().includes(searchText)) || (event.description.toLowerCase().includes(searchText))
+      
+      const matchesCategory = (selectedCategories.length === 0) ||  (selectedCategories.includes(event.category))
+
+      return (matchesSearch && matchesCategory)
+  })
+
+  if (filteredEvents.length === 0){
+    const kindMessage = document.createElement("h2")
+    kindMessage.innerHTML = "sorry, there is no matching events"
+    cardsContainer.innerHTML = ``
+    cardsContainer.appendChild(kindMessage)
+  } else {
+    cardsContainer.innerHTML = ''
+
+  
+    renderCards(filteredEvents, cardsContainer)
+  }
+  
+}
+
+
+searchInput.addEventListener("input", filterEvents)
+checkboxes.forEach(checkbox => checkbox.addEventListener("change", filterEvents))

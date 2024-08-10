@@ -197,6 +197,28 @@ const currentDate = "2023-01-01"
 const pastEvents = events.filter(event => (event.date) <= currentDate)
 const cardsContainer = document.getElementById("cardsContainer")
 
+
+const checkContainer = document.getElementById("checkContainer")
+const arrayCheck = []
+
+pastEvents.forEach(elem => {
+  if (arrayCheck.includes(elem.category) === false){
+    arrayCheck.push(elem.category)
+  }
+})
+
+
+arrayCheck.forEach(elem => {
+  const check = document.createElement("div")
+  check.innerHTML = `
+    <input class="formCheck" type="checkbox" value="" name="${elem}">
+    <label class="formCheckLabel" for="${elem}">
+      ${elem}
+    </label>`
+    checkContainer.appendChild(check)
+})
+
+
 function renderCards (array, container){
     for (let i=0; i<array.length; i++){
       const card = document.createElement("div")
@@ -220,3 +242,36 @@ function renderCards (array, container){
 
 }
 renderCards(pastEvents, cardsContainer)
+
+const searchInput = document.getElementById("searchInput")
+const checkboxes = document.querySelectorAll(".formCheck")
+
+function filterEvents() {
+  const searchText = searchInput.value.toLowerCase(); 
+  const selectedCategories = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.name)
+
+  let filteredEvents = pastEvents.filter(event => {
+      const matchesSearch = (event.name.toLowerCase().includes(searchText)) || (event.description.toLowerCase().includes(searchText))
+      
+      const matchesCategory = (selectedCategories.length === 0) ||  (selectedCategories.includes(event.category))
+
+      return (matchesSearch && matchesCategory)
+  })
+
+  if (filteredEvents.length === 0){
+    const kindMessage = document.createElement("h2")
+    kindMessage.innerHTML = "sorry, there is no matching events"
+    cardsContainer.innerHTML = ``
+    cardsContainer.appendChild(kindMessage)
+  } else {
+    cardsContainer.innerHTML = ''
+
+  
+    renderCards(filteredEvents, cardsContainer)
+  }
+}
+
+
+searchInput.addEventListener("input", filterEvents)
+checkboxes.forEach(checkbox => checkbox.addEventListener("change", filterEvents))
+

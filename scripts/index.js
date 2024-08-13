@@ -235,11 +235,10 @@ function renderCards (array, container){
             </div>
             <div class="cardButtonContainer ">
               <span class="textCard">$${array[i].price}</span>
-              <a href="./pages/details.html" class="btn btn-secondary">Details</a>
+              <a href="./pages/details.html?id=${array[i]._id}" class="btn btn-secondary">Details</a>
             </div>
             
         </div>`
-        // console.log(card);
         container.appendChild(card)
     }
 

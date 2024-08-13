@@ -192,85 +192,36 @@ const events = [
     }
 ]
 
-const currentDate = "2023-01-01"
+function getEventDetails() {
+    const params = new URLSearchParams(window.location.search)
+    const eventId = params.get('id')
+    
+    const event = events.find(event => event._id === eventId)
 
-const pastEvents = events.filter(event => (event.date) <= currentDate)
-const cardsContainer = document.getElementById("cardsContainer")
-
-
-const checkContainer = document.getElementById("checkContainer")
-const arrayCheck = []
-
-pastEvents.forEach(elem => {
-  if (arrayCheck.includes(elem.category) === false){
-    arrayCheck.push(elem.category)
-  }
-})
-
-
-arrayCheck.forEach(elem => {
-  const check = document.createElement("div")
-  check.innerHTML = `
-    <input class="formCheck" type="checkbox" value="" name="${elem}">
-    <label class="formCheckLabel" for="${elem}">
-      ${elem}
-    </label>`
-    checkContainer.appendChild(check)
-})
-
-
-function renderCards (array, container){
-    for (let i=0; i<array.length; i++){
-      const card = document.createElement("div")
-      card.classList.add("card")
-      card.innerHTML = `
-      <img src="${array[i].image}" class="card-img-top cardImg" alt="${array[i].name}">
-      <div class="card-body">
-          <h5 class="card-title text-center">${array[i].name}</h5>
-          <div class="textContainer mb-4">
-            <p class="card-text">${array[i].description}</p>
-          </div>
-          <div class="cardButtonContainer ">
-            <span class="textCard">$${array[i].price}</span>
-            <a href="../pages/details.html?id=${array[i]._id}" class="btn btn-secondary">Details</a>
-          </div>
-          
-      </div>`
-      container.appendChild(card)
-  }
-
-}
-renderCards(pastEvents, cardsContainer)
-
-const searchInput = document.getElementById("searchInput")
-const checkboxes = document.querySelectorAll(".formCheck")
-
-function filterEvents() {
-  const searchText = searchInput.value.toLowerCase(); 
-  const selectedCategories = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.name)
-
-  let filteredEvents = pastEvents.filter(event => {
-      const matchesSearch = (event.name.toLowerCase().includes(searchText)) || (event.description.toLowerCase().includes(searchText))
-      
-      const matchesCategory = (selectedCategories.length === 0) ||  (selectedCategories.includes(event.category))
-
-      return (matchesSearch && matchesCategory)
-  })
-
-  if (filteredEvents.length === 0){
-    const kindMessage = document.createElement("h2")
-    kindMessage.innerHTML = "sorry, there is no matching events"
-    cardsContainer.innerHTML = ``
-    cardsContainer.appendChild(kindMessage)
-  } else {
-    cardsContainer.innerHTML = ''
-
-  
-    renderCards(filteredEvents, cardsContainer)
-  }
+    renderEventDetails(event)
+   
 }
 
+function renderEventDetails(event) {
+    const eventDetailsContainer = document.querySelector(".details")
+    eventDetailsContainer.innerHTML = `
+        <section class="w-50 navbar d-flex justify-content-around flex-wrap">
+          <div>
+            <img class="detailsImg" src="${event.image}" alt="${event.name}">
+          </div>
+            
+          <div>
+            <h3 class="text-center detailsTitle">${event.name}</h3>
+            <ul class="list-group p-4">
+              <li class="">date: ${event.date}</li>
+              <li class="">category: ${event.category}</li>
+              <li class="">place: ${event.place}</li>
+              <li class="">capacity: ${event.capacity}</li>
+              <li class="">${event.assistance ? 'assistance' : 'estimate'}: ${event.assistance || event.estimate}</li>
+              <li class="">price: $${event.price}</li>
+            </ul>
+          </div>
+        </section>`
+}
 
-searchInput.addEventListener("input", filterEvents)
-checkboxes.forEach(checkbox => checkbox.addEventListener("change", filterEvents))
-
+getEventDetails();

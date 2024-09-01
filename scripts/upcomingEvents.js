@@ -13,7 +13,7 @@ const searchInput = document.getElementById("searchInput")
 fetch("https://aulamindhub.github.io/amazing-api/events.json").then(res => res.json()).then(res => {
 
   const currentDate = res.currentDate
-  const upcomingEvents = res.events.filter(event => (event.date) > currentDate)
+  const upcomingEvents = res.events.filter(event => (event.date) >= currentDate)
   
   
   

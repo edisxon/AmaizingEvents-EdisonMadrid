@@ -3,6 +3,7 @@
 
 
 
+
 function renderEventDetails(event) {
     const eventDetailsContainer = document.querySelector(".details")
     eventDetailsContainer.innerHTML = `

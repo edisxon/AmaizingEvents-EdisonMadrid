@@ -24,6 +24,12 @@ html{
     position: absolute;
     
     color: rgb(143, 45, 86);
+    text-shadow:
+
+        -1px -1px 0 white, 
+        1px -1px 0 white, 
+        -1px 1px 0 white, 
+        1px 1px 0 white; 
 }
 body{
     height: 100%;
@@ -37,10 +43,7 @@ body{
 .cardImg{
     height: 10em;
 }
-.details{
-    
-    margin-top: 2em;
-}
+
 .detailsImg{
     width: 25vw;
 }
@@ -59,6 +62,7 @@ th, td {
 
 footer{
     margin-top: 1em;
+    height: 5%;
 }
 
 .cardButtonContainer{
@@ -77,3 +81,39 @@ footer{
 main{
     flex: 1;
 }
+
+.detailsSpan{
+    color: rgb(143, 45, 86);
+}
+
+
+#detailsContainer{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.detailCard{
+    border-radius: 3%;
+    box-shadow: 5px 5px 10px black;
+}
+
+
+.detailText{
+    background-color: rgb(115, 210, 222);
+    border-radius: 2%;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .detailsImg{
+        width: 175px;
+    }
+    .detailCard{
+        border-radius: 5%;
+    }
+}
+
